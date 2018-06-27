@@ -9,9 +9,10 @@ export const environment = {
   rollbar_key: '',
   date_format: 'DD MM YY HH:mm:ss',
   api: {
-    client_id:     '49i8o287f8kk00840cg4ggkws0o0g44ocsogkc0w0g84o80co4',
-    client_secret: '22zpxqpr0r40wo0g8kw00k4kccg0wwkso8ccc0ogsgwogcssss',
-    host:          'http://localhost:8001',
+    client_id:     '3852a711471790556ec0d3add8b9c338c64cce16aa9bc118',
+    client_secret: 'f8d09d6ddb156ca759b001974d1b93d4fda3037de1671733',
+    host:          'http://localhost:8042/back',
     token_path:    '/oauth/v2/token'
-  }
+  },
+
 };
