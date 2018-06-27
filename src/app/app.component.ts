@@ -55,46 +55,38 @@ export class AppComponent {
 
     // ngxPermissions wrapper
 
-     /*
-     PERMISSIONS
+     /*  PERMISSIONS */
 
-     pia = [
-     'CanCreatePIA', 'CanCreatePIAExample', 'CanEditPIA','CanShowPIA',
-     'CanEvaluatePIA', 'CanCancelEvaluatePIA', 'CanValidatePIA', 'CanCancelValidatePIA',
-     'CanDeletePIA', 'CanExportPIA']
-     sections = ['AccessToContextSection', 'AccessToPrinciplesSection', 'AccessToRisksSection', 'AccessToValidationSection']
-      */
+    let roles = {};
 
-    this.permissionsService.loadRolesAndPermissions({
-      'ROLE_USER': [],
-      'ROLE_CONTROLLER': [
-        'CanEditPIA', 'CanCancelEvaluatePIA', 'CanAskEvaluatePIA',
-        'AccessToContextSection', 'AccessToPrinciplesSection', 'AccessToRisksSection'
-      ],
-      'ROLE_DPO': [
-        'CanCreatePIA', 'CanCreatePIAExample', 'CanShowPIA',
-        'CanEvaluatePIA', 'CanValidatePIA', 'CanCancelValidatePIA',
-        'CanDeletePIA', 'CanExportPIA', 'CanCreateFolder',
-        'AccessToContextSection', 'AccessToPrinciplesSection', 'AccessToRisksSection', 'AccessToValidationSection'
-      ],
-      'ROLE_ADMIN': [
-        'CanCreatePIA', 'CanCreatePIAExample', 'CanEditPIA', 'CanShowPIA',
-        'CanEvaluatePIA', 'CanCancelEvaluatePIA', 'CanValidatePIA', 'CanCancelValidatePIA',
-        'CanDeletePIA', 'CanExportPIA', 'CanCreateFolder',
-        'AccessToContextSection', 'AccessToPrinciplesSection', 'AccessToRisksSection', 'AccessToValidationSection'
-      ],
-      'ROLE_SUPER_ADMIN': []
-    }); 
+    roles['ROLE_USER'] = [];
 
+    roles['ROLE_CONTROLLER'] = [
+      'CanEditPIA', 'CanCancelEvaluatePIA', 'CanAskEvaluatePIA',
+      'AccessToContextSection', 'AccessToPrinciplesSection', 'AccessToRisksSection'
+    ];
+    roles['ROLE_DPO'] = roles['ROLE_CONTROLLER'].concat([
+      'CanCreatePIA', 'CanCreatePIAExample', 'CanShowPIA',
+      'CanEvaluatePIA', 'CanValidatePIA', 'CanCancelValidatePIA',
+      'CanDeletePIA','CanImportPIA', 'CanExportPIA', 'CanCreateFolder',
+       'AccessToValidationSection'
+    ]);
+
+    roles['ROLE_ADMIN'] = [].concat(roles['ROLE_DPO']);
+    roles['ROLE_TECHNICAL_ADMIN'] = [].concat(roles['ROLE_ADMIN']);
+    roles['ROLE_SUPER_ADMIN'] = [].concat(roles['ROLE_TECHNICAL_ADMIN']);
+
+    this.permissionsService.loadRolesAndPermissions(roles);
+/*
     this.ngxPermissionsConfigurationService.addPermissionStrategy('disable', (templateRef: TemplateRef<any>) => {
       this._renderer.setAttribute(templateRef.elementRef.nativeElement.nextSibling, 'disabled', 'true');
     });
-
 
     this.ngxPermissionsConfigurationService.addPermissionStrategy('enable', (templateRef: TemplateRef<any>) => {
       this._renderer.removeAttribute(templateRef.elementRef.nativeElement.nextSibling, 'disabled');
     });
 
     this.ngxPermissionsConfigurationService.setDefaultOnUnauthorizedStrategy('disable');
+*/
   }
 }
